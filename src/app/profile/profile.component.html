@@ -1,0 +1,43 @@
+<p>profile works!</p>
+<div class="container main-div">
+  <div class="col-3 bg-light" >
+    <div class="filter-widget">
+      <div class="row">
+        <div class="col-10">
+          <h4>Select Country </h4>
+        </div>
+        <div class="col-2">
+          <i class="fa fa-arrow-down" aria-hidden="true" (click)="openCountry()"></i>
+        </div>
+      </div>
+      <div *ngIf="opencountry == true">
+
+        <div class="row ">
+          <div class="col-2 all-select">
+            <input class = "checkmark zoom " type="checkbox"  (click)="allchecked()" [(ngModel)]="globalCheck">
+          </div>
+          <div class="col-9">
+            <div class="password">
+              <input type="search"  name="password" class="form-control"[(ngModel)]="name" >
+              <i class="fa fa-search eye" aria-hidden="true"></i>
+          </div>
+          </div>
+        </div>
+        <ng-scrollbar  class="scroll-event"
+        thumbClass="white-scrollbars">
+        <div class="all-selects" *ngFor="let country of countrys  | filter:name ; let index " >
+        <label class = "">
+        <input  class = "checkmark zoom" type="checkbox" name="chk-{{index}}" (click)="onClickCountry(country)" [(ngModel)]="country.isChecked">
+        <img [src] = 'country.flag' class="img-p ">
+        {{country.name}}</label>
+        </div>
+
+  </ng-scrollbar>
+      </div>
+
+      </div>
+  </div>
+</div>
+
+
+

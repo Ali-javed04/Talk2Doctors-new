@@ -1,0 +1,118 @@
+
+<div class="content mgn">
+  <div class="container-fluid mgn">
+
+    <div class="container-fluid mgn" >
+      <div class="row">
+        <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+          <div class="profile-sidebar">
+            <div class="widget-profile pro-widget-content">
+              <div class="profile-info-widget">
+                <a class="booking-doc-img">
+                  <img src="{{getProfilePhoto}}">
+                </a>
+                <div class="profile-det-info">
+                  <h3>Dr {{identity.firstname}} {{identity.lastname}}</h3>
+                  <div class="patient-details">
+                    <h5>{{identity.email}}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-widget">
+              <nav class="dashboard-menu">
+                <ul>
+                  <li class="desh-li" [ngClass]="{'active': currentState('pending')}">
+                    <a (click)="activePage('pending')">
+                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                      <span>Pending Appointment</span>
+                    </a>
+                  </li>
+                  <li class="desh-li"  [ngClass]="{'active': currentState('approved')}">
+                      <a (click)="activePage('approved')">
+                          <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                        <span>Approved Appointment</span>
+                      </a>
+                    </li>
+                    <li class="desh-li"  [ngClass]="{'active': currentState('cancel')}">
+                        <a (click)="activePage('cancel')">
+                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                          <span>Cancel Appointment</span>
+                        </a>
+                      </li>
+                    <li class="desh-li"  [ngClass]="{'active': currentState('complete')}">
+                          <a (click)="activePage('complete')">
+                              <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                            <span>Complete Appointment</span>
+                          </a>
+                      </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-7 col-lg-8 col-xl-9">
+          <!-- total senerio of appoimentant
+           -->
+          <div class="row" style="margin-bottom: 34px;
+          margin-left: 0px;">
+            <div class="card dash-card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12 col-lg-4">
+                    <div class="dash-widget dct-border-rht">
+                      <div class="circle-bar circle-bar1">
+                        <div class="progress blue back"> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
+                          <div class="progress-value"><img src = "/assets/doctor-icon.png" class="img-fluid" style="top:65%"></div>
+                      </div>
+                      </div>
+                      <div class="dash-widget-info">
+                        <h6>Total Patient</h6>
+                        <h3>1500</h3>
+                        <p class="text-muted">Till Today</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-lg-4">
+                      <div class="dash-widget dct-border-rht">
+                          <div class="circle-bar circle-bar1">
+                            <div class="progress orange back"> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
+                              <div class="progress-value progress-value3"><img src = "/assets/doctor-icon.png" class="img-fluid" style="top:65%"></div>
+                          </div>
+                          </div>
+                          <div class="dash-widget-info">
+                            <h6>Total Patient</h6>
+                            <h3>1500</h3>
+                            <p class="text-muted">Till Today</p>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="col-md-12 col-lg-4">
+                      <div class="dash-widget dct-border-rht">
+                          <div class="circle-bar circle-bar1">
+                            <div class="progress yellow back"> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
+                              <div class="progress-value progress-value2"><img src = "/assets/doctor-icon.png" class="img-fluid" style="top:65%"></div>
+                          </div>
+                          </div>
+                          <div class="dash-widget-info">
+                            <h6>Total Patient</h6>
+                            <h3>1500</h3>
+                            <p class="text-muted">Till Today</p>
+                          </div>
+                        </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+          <!-- pending appoimentant -->
+          <app-pending-appointment  *ngIf="currentState('pending')"></app-pending-appointment>
+          <app-approved-appointment *ngIf="currentState('approved')"></app-approved-appointment>
+          <app-cancel-appointment *ngIf="currentState('cancel')"></app-cancel-appointment>
+          <app-complete-appointment *ngIf="currentState('complete')"></app-complete-appointment>
+        </div>
+      </div>

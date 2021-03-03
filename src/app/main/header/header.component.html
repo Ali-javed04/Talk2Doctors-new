@@ -1,0 +1,91 @@
+
+
+<header>
+  <!--- Navbar --->
+  <div class="container-fluid main-div">
+	<nav class="navbar navbar-expand-lg">
+
+
+
+		<div class="container">
+			<a class="navbar-brand "  [routerLink]="['/']" ><img class="logo-img" src="/assets/logo.png" alt=""></a>
+			<button class="navbar-btn d-sm-block d-lg-none d-md-none" type="button" data-toggle="collapse" data-target="#nvbCollapse" aria-controls="nvbCollapse">
+				<i class="fa fa-bars" aria-hidden="true"></i>
+			</button>
+			<div class="collapse navbar-collapse" id="nvbCollapse">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item pl-1" [ngClass]="{'active': currentState('home')}">
+            <a class="nav-link" [routerLink]="['/']" routerLinkActive="router-link-active" >Home</a>
+          </li>
+          <div class="dropdown" *ngIf="hasValidAuthenticationToken">
+            <button class="dropbtn" [ngClass]="{'active': currentState('appointment')}">Appointment
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="up-icon">
+              <i class="fa fa-caret-up iconi"></i>
+            </div>
+            <div class="dropdown-content">
+              <a class="nav-link" [routerLink]="['/appointment']" [queryParams] = "{page:'complete'}"  routerLinkActive="router-link-active" >Appointment Dashboard</a>
+              <a class="nav-link" [routerLink]="['/chatBox']" routerLinkActive="router-link-active" >Chat Box</a>
+              <a class="nav-link" [routerLink]="['/bookappointment']" routerLinkActive="router-link-active" >Make Appointment</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button class="dropbtn"[ngClass]="{'active': currentState('survey')}" >Surveys
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="up-icon">
+              <i class="fa fa-caret-up iconi"></i>
+            </div>
+            <div class="dropdown-content">
+              <a  class="nav-link" [routerLink]="['/survey']" routerLinkActive="router-link-active" >View Survey</a>
+              <a   *ngIf="hasValidAuthenticationToken" class="nav-link" [routerLink]="['/addnewsurvey']" routerLinkActive="router-link-active" >Add New Survey</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button class="dropbtn" [ngClass]="{'active': currentState('blog')}">Blogs
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="up-icon">
+              <i class="fa fa-caret-up iconi"></i>
+            </div>
+            <div class="dropdown-content">
+
+              <a class="nav-link" [routerLink]="['/blog']" routerLinkActive="router-link-active" >View Blogs</a>
+              <a  *ngIf="hasValidAuthenticationToken" class="nav-link" [routerLink]="['/addnewblog']" routerLinkActive="router-link-active" >Add New Blog</a>
+            </div>
+          </div>
+					<li class="nav-item pl-1"  [ngClass]="{'active': currentState('contact')}">
+            <a class="nav-link" [routerLink]="['/contact']" routerLinkActive="router-link-active" >Contact</a>
+          </li>
+          <li *ngIf="identityTypeLookup === IdentityType.Doctor && hasValidAuthenticationToken" class="nav-item pl-1" [ngClass]="{'active': currentState('prefrence')}">
+            <a class="nav-link" [routerLink]="['/prefrence']" routerLinkActive="router-link-active" >Prefrence</a>
+					</li>
+					<li *ngIf="!hasValidAuthenticationToken" class="nav-item pl-1">
+            <a class="nav-link" [routerLink]="['/login']" routerLinkActive="router-link-active" >Login</a>
+					</li>
+          <li *ngIf="hasValidAuthenticationToken"><img src="{{getProfilePhoto}}" class="header-user-img"></li>
+
+          <div *ngIf="hasValidAuthenticationToken" class="dropdown">
+            <button class="dropbtn" [ngClass]="{'active': currentState('profile')}">{{ identity.firstname}}{{identity.lastname }}
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="up-icon">
+              <i class="fa fa-caret-up iconi"></i>
+            </div>
+            <div class="dropdown-content">
+
+              <a id="my-account" class="small-menu-item" [routerLink]="['/profile',identity.identityID]"  title="My Account">My Account</a>
+              <a (click)="onLogOutClick()" class="small-menu-item" title="Logout" id="btn-logout">Logout</a>
+            </div>
+          </div>
+				</ul>
+			</div>
+    </div>
+
+  </nav>
+</div>
+	<!--# Navbar #-->
+	</header>
+
+

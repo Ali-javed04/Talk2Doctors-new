@@ -1,0 +1,29 @@
+/* Large screens ----------- */
+@media only screen and (min-width : 1824px) {
+  /* Styles */
+}
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1224px) {
+  /* Styles */
+}
+@mixin tablet {
+  @media only screen and (min-width:480px) and (max-width:768px) {
+    @content;
+  }
+}
+/* mobile screen size*/
+@mixin mobile {
+  @media only screen and (max-width:480px) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media only screen and (min-width:480px) {
+    @content;
+  }
+}
+@mixin isRTL {
+  div[dir="rtl"] {
+    @content;
+  }
+}

@@ -1,0 +1,43 @@
+<div class="sliderdiv p-0 m-0">
+  <ngx-slick-carousel class="carousel"
+  #slickModal="slick-carousel"
+  [config]="slideConfig"
+  >
+  <div  ngxSlickItem *ngFor="let slide of slides" class="slide h-imgs">
+  <img src="{{ slide.img }}" alt="" width="100%">
+  <h1 class="h-title">{{slide.title}}</h1>
+  </div>
+  </ngx-slick-carousel>
+</div>
+<div class="row search-main">
+  <div class="col-6 search-back">
+<div class="row search-back2">
+  <div class="col-10 p-0 m-0">
+    <!-- <input type="search" class="search-input"  > -->
+    <div class="ng-autocomplete">
+      <ng-autocomplete
+        [(ngModel)]="searchValue"
+        [data]="data"
+        [searchKeyword]="keyword"
+        (selected)='selectEvent($event)'
+        (inputChanged)='onChangeSearch($event)'
+        (inputFocused)='onFocused($event)'
+        [itemTemplate]="itemTemplate"
+        [notFoundTemplate]="notFoundTemplate"
+        [placeholder]="place">
+      </ng-autocomplete>
+      <ng-template #itemTemplate let-item>
+      <a [innerHTML]="item"></a>
+      </ng-template>
+      <ng-template #notFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+      </ng-template>
+      </div>
+  </div>
+  <div class="col-2 p-0 m-0">
+    <button class="search-btn" (click)="Search()">Search</button>
+  </div>
+</div>
+  </div>
+</div>
+

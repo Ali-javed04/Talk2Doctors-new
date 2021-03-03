@@ -1,0 +1,62 @@
+.filter-widget {
+  margin-bottom: 20px;
+}
+.filter-widget h4 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+.eye {
+  position: absolute;
+  right: 9px;
+  bottom: 10px;
+}
+.password {
+  position: relative;
+}
+.main-div {
+  justify-content: center;
+  display: flex;
+}
+.img-p {
+  padding-left: 19px;
+}
+::ng-deep {
+  ng-scrollbar.scroll-event {
+    --scrollbar-size: 8px;
+    --scrollbar-thumb-color: gray;
+    --scrollbar-hover-size: 12px;
+    --scrollbar-track-color: rgba(0, 0, 0, 0.05);
+    --scrollbar-border-radius: 10px;
+
+    height: 200px;
+    max-height: 200px;
+    border-radius: 3px;
+    border: 2px solid rgba(0, 0, 0, 0.05);
+  }
+}
+
+.page-title {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  transition: 0.2s;
+  background: white;
+  h1{
+    margin: 0;
+  }
+}
+.zoom {
+  zoom: 1.8;
+}
+.all-select {
+  padding-top: 7px;
+  padding-left: 22px;
+
+}
+.all-selects {
+  padding-top: 7px;
+  padding-left: 5px;
+
+}

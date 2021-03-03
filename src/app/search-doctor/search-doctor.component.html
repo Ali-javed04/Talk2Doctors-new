@@ -1,0 +1,107 @@
+
+  <div class="container-fluid" style="background-color:rgba(0,0,0,.03)">
+    <div class="container breadcrumb-bar mt-4 mb-4">
+      <nav class="breadcrumb" >
+        <ol class="breadcrumb">
+          <li  class="breadcrumb-item">Home</li>
+          <li class="breadcrumb-item">Search</li>
+        </ol>
+      </nav>
+      <h2 class = "breadcrumb-title">All {{specility}} Doctors</h2>
+    </div>
+    <div class="container pt-4">
+      <div class="row">
+
+
+      <div class="col-lg-4">
+        <div class="card search-filter">
+          <div class="card-header"><h4>Search Filter</h4></div>
+          <div class="card-body">
+            <!-- <form  > -->
+            <div class="filter-widget">
+              <input class="form-control" type="search" placeholder="Search your Doctor" [(ngModel)]="specialdoctor" >
+            </div>
+            <div class="filter-widget">
+              <h4>Select Gender</h4>
+              <div>
+              <label class = "">
+              <input name="gender_type" id="" class = "checkmark"  type="checkbox" value="Male" for="search" [(ngModel)]="male" >
+              Male Doctor</label>
+              </div>
+             <div>
+              <label class = "">
+              <input name="gender_type" id="" class = "checkmark"  type="checkbox" value="Female"  [(ngModel)]="female" >
+              Female Doctor</label>
+              </div>
+
+            </div>
+            <div class="filter-widget">
+                <h4>Select Speciality</h4>
+                <div *ngFor=" let speciality of countspecility ; let index">
+                <label class = "">
+                <input  class = "checkmark" type="checkbox" name="chk-{{index}}" (click)="onClickSpeciality(speciality)">
+                {{speciality.name}}</label>
+                </div>
+            </div>
+            <div class="filter-widget">
+            <div class = "btn-search">
+           <button (click)="applyFilter()" class = "btn btn-block">Search</button>
+            </div>
+            </div>
+          <!-- </form> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card" style="border: 1px solid #f0f0f0;
+      margin-bottom: 1.875rem;" *ngFor="let  doc of doctorstodisplay">
+          <div class="card-body" style="padding: 1.5rem;">
+            <div class="doctor-widget">
+              <div class="doctor-info-left row">
+                <div class="doctor-img col-lg-6">
+                  <img src="{{doc.profileImageUrl ? covertPhotoUrl(doc.profileImageUrl): '/assets/doctor.jpg'}}"alt="" class="docPic">
+                </div>
+                <div class="doc-info-cont col-lg-6">
+                  <h4 class="doc-name">{{doc.doctorName}}</h4>
+                  <p class="doc-speciality">{{doc.latestDegreeTitle}}  </p>
+                  <h5 class="doc-department">{{doc.docDep}}</h5>
+                  <div class="rating">
+                    <i class="fa fa-star" aria-hidden="true" ng-class="{'filled':doc.doctorStarRatting > 4}"></i>
+                    <i class="fa fa-star" aria-hidden="true" ng-class="{'filled':doc.doctorStarRatting > 3}"></i>
+                    <i class="fa fa-star" aria-hidden="true" ng-class="{'filled':doc.doctorStarRatting > 2}"> </i>
+                    <i class="fa fa-star" aria-hidden="true"  ng-class="{'filled':doc.doctorStarRatting > 1}"></i>
+                    <i class="fa fa-star" aria-hidden="true" ng-class="{'filled':doc.doctorStarRatting > 0}"></i>
+                  </div>
+                  <div class="clinic-details">{{doc.clinicDetail}}</div>
+                  <div class="clinic-services">
+                    <span>Whitning</span>
+                    <span>Dental Filling</span>
+                  </div>
+                </div>
+              </div>
+              <div class="doctor-info-right">
+                <div class="clini-infos">
+                  <ul>
+                    <li class="mt-3"><i class="fa fa-clock-o" aria-hidden="true"></i> {{doc.avaliableTime}} </li>
+                    <li class="mt-3"><i class="fa fa-money" aria-hidden="true"></i>    ${{doc.fee}}   </li>
+                  </ul>
+                </div>
+                <div class="clinic-booking">
+                  <a ui-sref="profile({identityId: doc.identityID})" style="text-decoration: none"><button class="clinic-booking-btn ">View Profile</button></a>
+                 <a
+                  style="text-decoration: none"><button class="clinic-booking-btn mt-4" (click) = "bookappoitment(doc.identityID)">Book Appointment</button></a>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    </div>
+  </div>
+
