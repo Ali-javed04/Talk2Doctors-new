@@ -33,6 +33,7 @@
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "ng2-search-filter": "^0.5.1",
+    "ngx-device-detector": "^2.0.6",
     "ngx-scrollbar": "^7.5.4",
     "ngx-slick-carousel": "^0.5.1",
     "ngx-toastr": "^13.2.0",

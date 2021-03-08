@@ -39,7 +39,7 @@
                 <h4>Select Speciality</h4>
                 <div *ngFor=" let speciality of countspecility ; let index">
                 <label class = "">
-                <input  class = "checkmark" type="checkbox" name="chk-{{index}}" (click)="onClickSpeciality(speciality)">
+                <input  class = "checkmark" type="checkbox" name="chk-{{index}}" (click)="onClickSpeciality(speciality)" [(ngModel)]="speciality.isChecked">
                 {{speciality.name}}</label>
                 </div>
             </div>

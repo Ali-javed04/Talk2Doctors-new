@@ -215,5 +215,24 @@ export interface ITopRatedDoctors {
 }
 export interface ICountSpecility {
   name: string
-  totalDoctors: number
+  totalDoctors: number,
+
+}
+
+export interface ITopRatedDoctors {
+  doctorID: number
+  doctorName: string
+  doctorStarRatting: number
+  latestDegreeTitle: string
+  profileImageUrl: string
+  availabletime: string
+  fee: number
+}
+export interface IProvinceLookupItem extends ILookupItem {
+  countryLookup: number
+}
+ export interface IFilterService {
+  (name: 'translate'): {
+      (translationId: string, interpolateParams?: any, interpolation?: string): string;
+  };
 }

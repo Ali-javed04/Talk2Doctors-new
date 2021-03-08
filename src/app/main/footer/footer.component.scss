@@ -1,0 +1,108 @@
+.footer {
+  background-color: #15558d;
+}
+.footer .footer-top {
+  padding: 40px 0;
+}
+.container-fluid {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.footer .footer-widget .footer-logo {
+  margin-bottom: 30px;
+}
+.footer .footer-widget .footer-about-content p {
+  color: #fff;
+}
+.footer .social-icon ul {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer .social-icon ul li {
+  margin-right: 15px;
+}
+.footer .social-icon ul li a {
+  color: #fff;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  font-size: 20px;
+  transition: all 0.4s ease 0s;
+  text-decoration: none;
+}
+.footer-title {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-transform: capitalize;
+}
+.footer .footer-widget.footer-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+.footer .footer-menu ul li {
+  margin-bottom: 10px;
+  position: relative;
+}
+.footer .footer-menu ul li a {
+  color: #fff;
+  font-size: 15px;
+  padding-left: 20px;
+  position: relative;
+  transition: all 0.4s ease 0s;
+  text-decoration: none;
+}
+
+.footer-contact-info {
+  color: #fff;
+  font-size: 15px;
+}
+.footer-contact-info .footer-address {
+
+  display: flex;
+}
+.footer-contact-info .footer-address span {
+  margin-right: 20px;
+}
+.footer-contact-info p i {
+  margin-right: 15px;
+}
+.footer .footer-bottom .copyright {
+  border-top: 1px solid #1663a6;
+  padding: 30px 0;
+}
+.footer .footer-bottom .copyright-text p {
+  color: #fff;
+  font-size: 15px;
+}
+.policy-menu {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+.policy-menu li {
+  display: inline-block;
+  margin-right: 15px;
+}
+.forward-icon {
+  color: white;
+    font-size: 18px;
+}
+.footer .footer-widget.footer-menu ul li :hover {
+  color: #fff;
+  letter-spacing: 0.5px;
+  padding-left: 10px;
+}
+.social-icon i:hover {
+
+  color: aquamarine;
+
+}

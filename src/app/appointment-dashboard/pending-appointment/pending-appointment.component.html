@@ -1,5 +1,10 @@
 <div class="container" *ngIf="noRecord == 0">
-  <p>No Record Found</p>
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="justify-content: center;">
+    <p style="color: #675ef3;
+    font-size: x-large;
+    text-align: center;" >No Record Found</p>
+    <img src="/assets/noRecord.svg" alt="" style="width: 100%;">
+  </div>
 </div>
 
 
@@ -33,25 +38,83 @@
       </div>
     </div>
     <div class="appointment-action">
-      <button class="btn color1" data-toggle="modal" data-target="#myModal" (click)="getAppointmentDetail(user.medicalRecordID)">
+      <button class="btn color1" data-toggle="modal" data-target="#myModal"   (click)="getAppointmentDetail(user.medicalRecordID)">
           <i class="fa fa-eye" aria-hidden="true"></i>
           <!-- <a ui-sref="appointmentDetailView({medicalRecordId: user.medicalRecordID})" style="text-decoration: none"><span>View</span></a> -->
           <span >View</span>
       </button>
-<!-- model -->
-<div  id="myModal" class="modal fade" role="dialog">
-<div class="modal-dialog">
+      <button class="btn  color2"  data-toggle="modal" data-target="#Accept">
+          <i class="fa fa-check" aria-hidden="true"></i>
+          <span>Accept</span>
+      </button>
+      <button class="btn  color3 " data-toggle="modal" data-target="#reject" (click)="emptyinputvalue()" >
+          <i class="fa fa-times" aria-hidden="true"></i>
+          <span>Cancel</span>
+      </button>
+    </div>
+  </div>
 
-<!-- Modal content-->
-<div class="modal-content">
+
+
+
+<!-- rejectdiv -->
+<div id="reject" class="modal fade model-opicity" role="dialog">
+  <div class="modal-dialog">
+  <!-- Modal content-->
+  <div class="modal-content">
   <div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Cancel</h4>
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+    </div>
+  <div class="model-body text-center">
+    <p class="capt">Are you Want to Cancel this Appointment</p>
+    <input type="text" class="form-control col-9 " style="margin-left:69px" placeholder="Please Clarify the Reason of Cancel" [(ngModel)]="rejectinput">
+    <div class="" style="margin-top: 25px ; margin-bottom: 25px">
+      <button class="btn yess" [disabled] = "rejectReason()" (click)="updateAppointment(user.medicalRecordID,2)" data-dismiss="modal">Yes</button>
+      <button class="btn noo" data-dismiss="modal">No </button>
+    </div>
+  </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- acceptdiv -->
+  <div  id="Accept" class="modal fade model-opicity" role="dialog">
+    <div class="modal-dialog"> -->
+    <!-- Modal content-->
+    <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Accept</h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+      </div>
+    <div class="model-body text-center">
+      <p class="capt">Are you Want to Accept this Appointment</p>
+      <div class="" style="margin-top: 25px ; margin-bottom: 25px">
+        <button class="btn yess" (click)="updateAppointment(user.medicalRecordID,3)" data-dismiss="modal">Yes</button>
+        <button class="btn noo" data-dismiss="modal">No </button>
+      </div>
+    </div>
+      </div>
+      </div>
+    </div>]
+    <!-- patient-details model -->
+
+<!-- model -->
+<div *ngIf="medicalRecord" id="myModal"  class="modal fade model-opicity" role="dialog">
+  <div class="modal-dialog">
+
+  <!-- Modal content-->
+  <div class="modal-content">
+  <div class="modal-header">
   <h4 class="modal-title">Patient Detail</h4>
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
   </div>
   <div class="modal-body">
     <div class="dashboard-div-row details-height theme-gradient-border" >
       <div class="row">
-      <div class="col-lg-12 form-group appointment-type-name">
+      <div class="col-lg-12 form-group appointment-type-name type-name">
         <span *ngIf="medicalRecord.medicalRecordData.medicalRecordTypeLookup === 1">
                 Online Appointment
         </span>
@@ -167,61 +230,7 @@
   </div>
   </div>
 
-</div>
-</div>
-
-
-
-
-
-      <button class="btn  color2"  data-toggle="modal" data-target="#Accept">
-          <i class="fa fa-check" aria-hidden="true"></i>
-          <span>Accept</span>
-      </button>
-      <div  id="Accept" class="modal fade" role="dialog">
-          <div class="modal-dialog">
-
-          <!-- Modal content-->
-          <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Accept</h4>
-            </div>
-          <div class="model-body text-center">
-            <p class="capt">Are you Want to Accept this Appointment</p>
-            <div class="" style="margin-top: 25px ; margin-bottom: 25px">
-              <button class="btn yess" (click)="updateAppointment(user.medicalRecordID,3)" data-dismiss="modal">Yes</button>
-              <button class="btn noo" data-dismiss="modal">No </button>
-            </div>
-          </div>
-            </div>
-            </div>
-          </div>
-
-      <button class="btn  color3 " data-toggle="modal" data-target="#reject" (click)="emptyinputvalue()" >
-          <i class="fa fa-times" aria-hidden="true"></i>
-          <span>Cancel</span>
-      </button>
-      <div  id="reject" class="modal fade" role="dialog">
-          <div class="modal-dialog">
-
-          <!-- Modal content-->
-          <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Cancel</h4>
-            </div>
-          <div class="model-body text-center">
-            <p class="capt">Are you Want to Cancel this Appointment</p>
-            <input type="text" class="form-control col-9 " style="margin-left:69px" placeholder="Please Clarify the Reason of Cancel" [(ngModel)]="rejectinput">
-            <div class="" style="margin-top: 25px ; margin-bottom: 25px">
-              <button class="btn yess" [disabled] = "rejectReason()" (click)="updateAppointment(user.medicalRecordID,2)" data-dismiss="modal">Yes</button>
-              <button class="btn noo" data-dismiss="modal">No </button>
-            </div>
-          </div>
-            </div>
-            </div>
-          </div>
-    </div>
   </div>
-</div>
+  </div>
+  </div>
+  <ngx-ui-loader></ngx-ui-loader>

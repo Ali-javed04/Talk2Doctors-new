@@ -1,0 +1,312 @@
+.patient-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  padding: 2px;
+  border: 2px solid #e8e8e8;
+}
+
+.patient-div h4 {
+  color: #008fd5;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.selected-patient {
+  background-color: #f0f0f0;
+}
+
+.dashboard-div-row {
+  background-color: #ffffff;
+  box-shadow: 0 0 3px 1px #5fc8d5;
+  padding: 12px;
+  margin: 10px 0 10px 0;
+  border-radius: 5px;
+}
+
+.status-row {
+  margin-top: 15px;
+}
+
+.details-height .row {
+  border-bottom: 1px solid #5fc8d5;
+  border-bottom-style: dashed;
+  width: 100%;
+  margin: 0 auto;
+
+  &:last-child {
+    border: 0;
+  }
+}
+
+.no-appointments {
+  margin-top: 0px;
+  color: brown;
+  font-size: 16px;
+}
+
+.dashboard-attach-btn {
+  width: 100%;
+}
+
+.patient-name {
+  font-weight: bold;
+  font-size: 20px;
+  color: #848586;
+}
+
+.note-info {
+  font-size: 12px;
+  margin-left: -15px;
+
+  b {
+    color: black;
+  }
+}
+
+.appointment-btn button {
+  width: 300px;
+  height: 40px;
+  font-size: 14px;
+  margin-top: 30px;
+}
+
+.appointment-type-name {
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+  text-decoration: underline;
+}
+
+.appointment-type-name span {
+  font-size: 16px;
+  margin-top: 30px;
+}
+
+.call-btn {
+  float: right;
+  margin: 30px 20px 0 0;
+  height: 40px;
+  background: white;
+  border: 2px solid #5fc8d5;
+  color: #5fc8d5;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 6px 30px;
+
+  i {
+    font-size: 16px;
+    margin-right: 10px !important;
+  }
+}
+
+.call-btn:hover {
+  background: #5fc8d5;
+  color: white;
+}
+
+.call-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  background: #666666;
+  z-index: 1000;
+  width: 20%;
+  padding: 20px 50px;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 6px;
+  text-align: center;
+}
+
+span#incoming-call {
+  color: green;
+  font-weight: 600;
+  text-align: -webkit-center;
+  font-size: 20px;
+  animation: blinker 1s linear infinite;
+}
+
+i.glyphicon.glyphicon-facetime-video {
+  padding-right: 12px;
+  color: green;
+  font-size: 25px;
+  vertical-align: sub;
+}
+
+#accept-call {
+  width: 50px;
+  float: left;
+  cursor: pointer;
+}
+
+#decline-call {
+  width: 50px;
+  float: right;
+  cursor: pointer;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+
+.diagnosisContainer {
+  bottom: 50px;
+  justify-content: center;
+  text-align: end;
+  position: relative;
+}
+
+.listOfSuggestArray {
+  // text-align: start;
+  // background-color: #ffffff;
+  // border: 1px solid #97dbe4;
+  // border-radius: 4px;
+  // z-index: 5;
+  // position: absolute;
+  // width: 100%;
+  // margin-top: 14px;
+  // box-shadow: 0 4px 6px rgba(32,33,36,.28);
+  // padding: 3px 5px 3px 0px;
+  text-align: start;
+  background-color: #ffffff;
+  border: 1px solid #97dbe4;
+  border-radius: 4px;
+  z-index: 5;
+  position: absolute;
+  width: 100%;
+  margin-top: 30px;
+  box-shadow: 0 4px 6px rgba(32, 33, 36, .28);
+  padding: 3px 5px 3px 0px;
+  max-height: 300px;
+  overflow: auto;
+}
+
+// text-align: start;
+// background-color: #ededed;
+
+
+// border-radius: 4px;
+// z-index: 5;
+// position: absolute;
+// margin-top: 15px;
+// right: 28px;
+
+
+
+.listOfSuggestArray li {
+  list-style-type: none;
+  padding: 2px;
+  margin: 3px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.listOfSuggestArray li:hover {
+  background-color: #007bff;
+  cursor: pointer;
+  color: white;
+}
+
+.inputs {
+  float: right;
+  margin-top: 17px;
+  position: relative;
+  bottom: 27px;
+  padding: 0;
+  width: 230px;
+  box-shadow: 0 4px 6px rgba(32, 33, 36, 0.28);
+}
+
+.selectedItem {
+  position: relative;
+  top: 10px;
+}
+
+.display-Array {
+  position: absolute;
+  right: -30px;
+  margin-top: 36px;
+  z-index: 99;
+}
+
+.div-Container {
+  right: 15px;
+  top: 8px;
+  border: 1px solid #ccc;
+  position: relative;
+  height: 144px;
+  max-height: 144px;
+  overflow: auto;
+  padding: 10px 15px;
+}
+
+.listing {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.listing li {
+  margin-right: 19px;
+}
+
+.listing li p {
+  font-size: 14px;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.listOfSuggestArray li span {
+  font-size: 15px;
+  text-transform: capitalize;
+}
+
+.listOfSuggestArray li span i {
+  font-size: 12px;
+  color: #97dbe4;
+  padding-right: 5px;
+}
+
+.input-box {
+  height: 30px;
+  border: none;
+}
+
+.input-box:focus {
+  outline: none;
+}
+
+.input-box::-webkit-input-placeholder {
+  color: #8f8f8f;
+  font-size: 13px;
+}
+
+.input-box:-ms-input-placeholder {
+  color: #8f8f8f;
+  font-size: 13px;
+}
+
+.input-box::placeholder {
+  color: #8f8f8f;
+  font-size: 13px;
+}
+
+.listing-icon {
+  float: right;
+  position: relative;
+  right: 30px;
+  font-size: 25px;
+  color: #97dbe4;
+}
+.prescriptionAligment{
+margin-top: 22px;
+}
+.headon{
+  padding-top: 20px;
+}

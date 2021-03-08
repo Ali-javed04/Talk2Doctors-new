@@ -1,3 +1,4 @@
+<!-- main-slider -->
 <div class="sliderdiv p-0 m-0">
   <ngx-slick-carousel class="carousel"
   #slickModal="slick-carousel"
@@ -9,11 +10,11 @@
   </div>
   </ngx-slick-carousel>
 </div>
+<!-- search bar -->
 <div class="row search-main">
-  <div class="col-6 search-back">
+  <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8 search-back">
 <div class="row search-back2">
   <div class="col-10 p-0 m-0">
-    <!-- <input type="search" class="search-input"  > -->
     <div class="ng-autocomplete">
       <ng-autocomplete
         [(ngModel)]="searchValue"
@@ -40,4 +41,230 @@
 </div>
   </div>
 </div>
+ <!-- doctor specility -->
+ <div class="container">
+  <div class=" text-center mt-4 mb-4 speclity">
+    <h4 class="mainhead animated bounce infinite">Browse By Speciality</h4>
+    <span>We can demonstrate the doctors by speciality for easiness to find the required doctor for you </span>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 wow fadeInUp fadeInDown fadeInDownBig"  data-wow-delay="0.6s" *ngFor = " let specility of countspecility">
+        <a ui-sref="doctor-list({specility: specility.name })" [routerLink]="['/search']" [queryParams] = "{specility:specility.name }"  style="text-decoration: none"> <div class="category-box">
+            <div class="category-image">
+              <img src="/assets/cardiologist.png" alt="">
 
+            </div>
+            <div class="category-content">
+              <h4>{{specility.name}}</h4>
+              <span>{{specility.totalDoctors}} Doctors</span>
+            </div>
+          </div></a>
+    </div>
+  </div>
+    </div>
+     <!-- top listed doctor -->
+
+<div class="container-fluid section-doctor">
+  <div class="section-header text-center">
+      <h4 class="mainhead">Book Our Best Doctor</h4>
+      <span>These doctor gain better reviews by their client </span>
+  </div>
+  <div class="container mt-5">
+    <ngx-slick-carousel class="carousel"
+    #slickModal="slick-carousel"
+    [config]="doctorSlide"
+    >
+    <div  ngxSlickItem *ngFor="let doctor of topRatedDoctors" >
+      <div class="" >
+        <div class=" profile-widget " >
+            <div class="doc-img">
+             <img src="{{doctor.profileImageUrl ? covertPhotoUrl(doctor.profileImageUrl): '/assets/doctor.jpg'}}"alt="" class="">
+              <a ><i class="fa fa-bookmark fav-btn" aria-hidden="true"></i></a>
+            </div>
+            <div class="pro-content mt-4">
+              <h2 class="title">{{doctor.doctorName}}</h2>
+              <p class="specility" style="font-weight: 100; font-size: 13px; line-height: 21px; ">I have passion of acting and little bit of programining as well {{doctor.latestDegreeTitle}}</p>
+              <div class="rating">
+                <i class="fa fa-star" aria-hidden="true" ng-class="{'filled':doctor.doctorStarRatting > 4}"></i>
+                <i class="fa fa-star" aria-hidden="true" ng-class="{'filled':doctor.doctorStarRatting > 3}"></i>
+                <i class="fa fa-star" aria-hidden="true" ng-class="{'filled':doctor.doctorStarRatting > 2}"> </i>
+                <i class="fa fa-star" aria-hidden="true"  ng-class="{'filled':doctor.doctorStarRatting > 1}"></i>
+                <i class="fa fa-star" aria-hidden="true" ng-class="{'filled':doctor.doctorStarRatting > 0}"></i>
+              </div>
+              <ul class="available-info">
+
+                <li class="mt-3"><i class="fa fa-clock-o" aria-hidden="true"></i>  Available Friday 2 PM {{doctor.availabletime}}</li>
+                <li class="mt-3"><i class="fa fa-money" aria-hidden="true"></i>    $100 {{doctor.fee}}  </li>
+              </ul>
+              <div class="row row-sm">
+                <div class="col-6">
+                    <a ui-sref="profile({identityId: doctor.identityID})" style="text-decoration: none"><button class=" view-btn">Profile</button></a>
+                </div>
+                <div class="col-6">
+                  <button class=" book-btn" (click) = "bookappoitment(doctor.identityID)">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    </div>
+    </ngx-slick-carousel>
+  </div>
+</div>
+<div class="container-fluid" style="background-color: #fff ; padding: 80px 0">
+
+  <div class="container-fluid" style="padding-left:30px ; padding-right: 30px">
+    <div class="row">
+      <div class="col-md-5">
+        <img src="/assets/feature.png"  alt="" class=" feature-img wow lightSpeedIn" data-wow-delay="0.6s">
+      </div>
+      <div class="col-md-7">
+        <div class="feature-header">
+          <h2>Available Features</h2>
+          <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+        </div>
+        <div class="feature-slider">
+          <div class="row">
+              <div class="col-lg-1">
+                  <i class="fa fa-chevron-left"style="margin-top:80px;    width: 1.625rem;
+                    height: 1.625rem;" (click)="toggletabmminus(showTab)" disabled="showtab ==1" ></i>
+
+                  </div>
+                  <div class="col-lg-10">
+
+                    <!-- ist item -->
+                      <div   *ngIf="showTab == 1" class="">
+
+                          <div class="service-sec">
+                            <div class="icon">
+
+                                <i class="icon-chat"></i>
+
+                            </div>
+                            <div class="detail">
+                              <h5>Talk to Doctors</h5>
+                              <p>
+                                If you need medical advice you can locate a doctor using search features and talk to him online.
+                                Remember we recommend online
+                                advice from only doctors with grade 4 or above on our Panel (
+
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- 2nd item -->
+                        <div  *ngIf="showTab == 2" class="" >
+                            <div class="service-sec">
+                              <div class="icon">
+
+                                  <i class="icon-calendar"></i>
+
+                              </div>
+                              <div class="detail">
+                                <h5>Online Appointment</h5>
+                                <p>If for some reason you are not able to get walk-In appointment at the moment weoffer facility of
+                                  online
+                                  appointment where you can talk to your doctor online for further guidance.</p>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- 34d item -->
+                          <div   *ngIf="showTab == 3" class="">
+                              <div class="service-sec">
+                                <div class="icon">
+
+                                    <i class="icon-search"></i>
+
+                                </div>
+                                <div class="detail">
+                                  <h5>Search for a Doctor</h5>
+                                  <p>If you need a doctor for consultation using wide range of search options in our system.
+                                    Talk2Doctors
+                                    recomends doctors for you based on their complete profile and patients feedback.</p>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- 4th item -->
+                            <div  *ngIf="showTab == 4" class="">
+                                <div class="service-sec">
+                                  <div class="icon">
+                                    <i class="icon-doctor"></i>
+                                  </div>
+                                  <div class="detail">
+                                    <h5>Doctors Database</h5>
+                                    <p>We have rich database of qualified doctors along with details about their qualification, clinic
+                                      location,
+                                      timing, contact details and patient's feedback.</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="carosal text-center" >
+                                  <i class="fa fa-minus fsize" aria-hidden="true" (click)="tabToggle(1)" ng-class = "{'active1':showTab == 1}"></i>
+                                  <i class="fa fa-minus fsize" aria-hidden="true" (click)="tabToggle(2)" ng-class = "{'active1':showTab == 2}"></i>
+                                  <i class="fa fa-minus fsize" aria-hidden="true" (click)="tabToggle(3)" ng-class = "{'active1':showTab == 3}"></i>
+                                  <i class="fa fa-minus fsize" aria-hidden="true" (click)="tabToggle(4)" ng-class = "{'active1':showTab == 4}"></i>
+                              </div>
+
+                  </div>
+                  <div class="col-lg-1">
+                    <i class="fa fa-chevron-right"style="margin-top:80px;    width: 1.625rem;
+                        height: 1.625rem;" (click)="tabtoggleplus(showTab)" disabled="showtab == 4"></i>
+                   </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- blogs -->
+
+
+
+<div class="container-fluid section-doctor">
+  <div class="section-header text-center">
+      <h4 class="mainhead">Blogs And News</h4>
+      <span>Latest Blog Posted by Doctors to motivate the user by sharing intrested story </span>
+  </div>
+  <div class="container-fluid mt-5">
+    <div class="row" >
+        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" *ngFor="let blog of blogs">
+          <div class="blog grid-blog">
+            <div class="blog-image">
+              <a href="">
+                <img src="{{blog.blogImg}}" class="img-fluid" alt="">
+              </a>
+            </div>
+            <div class="blog-content">
+              <ul class="entry-meta meta-item">
+                <li>
+                  <div class="post-author">
+                    <a href="">
+                      <img src="{{blog.authorImg}}" alt="">
+                      <span>{{blog.authorName}}</span>
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <li class="mt-3"><i class="fa fa-clock-o" aria-hidden="true"></i>{{blog.date}}
+                </li>
+              </ul>
+              <h3 class="blog-title">
+                <a href="">{{blog.blogTitle}}</a>
+              </h3>
+              <p class="mb-0">{{blog.desp}}</p>
+            </div>
+
+          </div>
+
+        </div>
+    </div>
+  </div>
+  <div class="view-all text-center">
+    <a href="" class="btn btn-primarys">View All</a>
+
+  </div>
+</div>

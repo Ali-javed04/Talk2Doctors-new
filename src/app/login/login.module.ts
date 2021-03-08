@@ -39,7 +39,9 @@ import { RegisterComponent } from './register/register.component';
 
 
   ],
-  providers: [AuthenticationService,{
+  providers: [
+    AuthenticationService,
+    {
     provide : HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi   : true,

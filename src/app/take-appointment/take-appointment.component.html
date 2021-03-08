@@ -1,0 +1,277 @@
+<div class="container-fluid bg-white">
+  <div class="container bg-white">
+
+    <!-- ist row start -->
+    <div class="row">
+      <div class="col-lg-8 col-mg-8 col-sm-12 col-xs-12">
+        <h2 class="headon">
+          <strong>
+            Appointment Details - {{ medicalRecord.patientName }}
+          </strong>
+        </h2>
+      </div>
+      <div class="col-lg-4 col-mg-4 col-sm-12 col-xs-12">
+        <button ng-if="identityTypeLookup === IdentityType.Doctor" class="call-btn"
+          (click)="openVideoChatWindow(1)" title="{{'Call ' + medicalRecord.patientName}}">
+          <i class="glyphicon glyphicon-earphone"></i>Call
+        </button>
+      </div>
+    </div>
+    <!-- ist row end  -->
+
+
+      <!-- 2nd row start -->
+      <div class="row dashboard-div-row">
+
+
+
+
+          <div class="form-inline col-lg-7 col-mg-7 col-sm-12 col-xs-12">
+
+
+
+            <div class="col-lg-4" ng-if="identityTypeLookup === IdentityType.Patient">
+              <button id="upload-report" name="UploadReport" class="btn btn-info dashboard-attach-btn " type="button"
+                ng-disabled="!uploadedReportName || medicalRecord.medicalRecordData.caseStatusLookup !== caseStatus.Approved"
+                (click)="updatePatientAppointmentDetails()">
+                Attach Report
+              </button>
+            </div>
+          </div>
+
+        <!-- 2nd row end -->
+      </div>
+<!-- 3rd row start -->
+      <div class="row">
+        <div class="col-lg-8 col-mg-8 col-sm-12 col-xs-12">
+          <p ng-if="identityTypeLookup === IdentityType.Doctor" style="font-size: 12px;" class="note-info pl-4">
+            <b>Note:</b> You can modify appointment information here. We will inform patient through email.</p>
+              <div class="row status-row">
+            <div class="Diagnosis-Icon col-12">
+              <label> Diagnosis </label>
+              <i (click)="toggleDiagnosis()" class="glyphicon glyphicon-list listing-icon"
+                aria-hidden="true">
+              </i>
+            </div>
+            <div class="display-Array" ng-if="showDiagnosisList">
+              <div class="inputs col-md-12">
+                <input type="text" class="form-control" ng-model="searchableDiagnosisText"
+                  ng-keyup="onSearchDiagnosisList()" placeholder="Search Daignosis">
+              </div>
+
+              <div class="listOfSuggestArray">
+                <li class="col-md-12" *ngFor="let suggestedItem of filteredListOfDiagnosis"
+                  (click)="onSelectDiagnosis(suggestedItem)">
+                  <span>
+                    <i class="glyphicon glyphicon-arrow-left"></i>
+                    {{suggestedItem}}
+                  </span>
+                </li>
+              </div>
+            </div>
+            <div class="col-lg-12 form-group">
+              <div class="div-Container" style="position: relative; height: 144px;">
+                <div class="preferncessss">
+                  <ul class="listing">
+                    <li *ngFor="let item of selectedDiagnosis">
+                      <p>{{$index + 1}}. <input type="text" ng-model="item" class="input-box">
+                        <button class="btn btn-danger text-white" (click)="removeDiagnose($index)"> X</button> </p>
+                    </li>
+                  </ul>
+                  <input id="diagnosisInputBox" ng-model="newDiagnosisValue" class="input-box"
+                    placeholder="Add Diagnosis..." type="text" ng-keypress="addNewDiagnosis($event)">
+                </div>
+              </div>
+            </div>
+
+          <div  class=" row  prescriptionAligment ">
+            <div class="Diagnosis-Icon col-12">
+              <label> Prescription </label>
+              <i (click)="togglePrescriptions()"  hide-login="hideLoginContainer()" clickwhere="closeDropDown()" class="glyphicon glyphicon-list listing-icon"
+                aria-hidden="true">
+              </i>
+            </div>
+            <div class="display-Array" ng-if="showPrescriptionList">
+              <div class="inputs col-md-12">
+                <input type="search" class="form-control" ng-model="searchablePrescriptionText"
+                  ng-keyup="onSearchPrescriptionsList() " placeholder="Search Medication">
+              </div>
+              <div class="listOfSuggestArray">
+                <ul>
+                  <li *ngFor="let suggestedItem of filteredListOfPrescriptions"
+                   (click)="onSelectPrescription(suggestedItem)">
+                    <span>
+                     <i class="glyphicon glyphicon-arrow-left"></i>
+                     {{suggestedItem}}
+                    </span>
+                 </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-12 form-group">
+              <div class="div-Container" style="position: relative; height: 144px;">
+                <div class="preferncessss">
+                  <ul class="listing">
+                    <li *ngFor="let item of selectedPrescriptions" ng-init="$rowIndex = $index">
+                      <p>{{$index + 1}} <input type="text" ng-model=item.medicineName class="input-box">
+                        <input type="text" ng-model=item.dosage size="5" class="input-box">
+                        <input type="text" ng-model=item.dosageDuration size="7" class="input-box">
+                        <input type="text" ng-model=item.durationCount size="3" class="input-box">
+                        <button class="btn btn-danger text-white" (click)="removeMeidcation($index)"> X</button> </p>
+                    </li>
+                  </ul>
+                      <form name="preferenceform" class="frm_preference" ng-submit="addNewPrescription()" id="frm_preference">
+                          <input id="prescriptionValue" ng-model="newPrescriptionValue" class="input-box"
+                            placeholder="Enter Prescription..." type="text" form="preferenceform" ng-required="true" size="15">
+                          <input id="DosageValue" ng-model="newDosageValue" class="input-box"
+                            placeholder="Dosage..." type="text" form="preferenceform" size="15">
+                          <input id="DurationUnitValue" ng-model="newDurationUnitValue" class="input-box"
+                           placeholder="Duration Unit..." type="text" form="preferenceform" size="15">
+                          <input id="DurationCountValue" ng-model="newDurationCountValue" class="input-box"
+                            placeholder="Duration Count..." type="text" form="preferenceform" size="15">
+                          <button type="submit" class="btn btn-success">Add</button>
+                      </form>
+
+                </div>
+              </div>
+            </div>
+
+
+          <div class="row text-center appointment-btn"
+            ng-if="medicalRecord.medicalRecordData.caseStatusLookup !== caseStatus.Expired">
+
+            <button id="update-details" name="updateDetails" class="btn btn-info m-5" type="button"
+              ng-if="medicalRecord.medicalRecordData.caseStatusLookup !== caseStatus.Expired && identityTypeLookup === IdentityType.Doctor"
+              (click)="updatePatientAppointmentDetails()">
+              Complete Appointment
+            </button>
+          </div>
+          <div ng-if="medicalRecord.medicalRecordData.caseStatusLookup === caseStatus.Expired">
+            <span class="small text-danger" style="font-size: 13px;">This appointment is expired.</span>
+          </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="col-lg-4 col-mg-4 col-sm-12 col-xs-12 ">
+          <div class="dashboard-div-row details-height theme-gradient-border" >
+              <div class="row">
+              <div class="col-lg-12 form-group appointment-type-name">
+                <span>{{ (medicalRecord.medicalRecordData.medicalRecordTypeLookup === 1
+                        ? 'Online Appointment'
+                        : 'WalkIn Appointment')
+                      }}
+                </span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 form-group">
+                <label> Appointment Number </label>
+              </div>
+              <div class="col-lg-6 form-group">
+                <span>{{ medicalRecord.medicalRecordData.appointmentNumber }}</span>
+              </div>
+            </div>
+
+            <div class="row" ng-if="identityTypeLookup === IdentityType.Patient">
+              <div class="col-lg-6 form-group">
+                <label> Doctor Name </label>
+              </div>
+              <div class="col-lg-6 form-group">
+                <span>{{ medicalRecord.doctorName }}</span>
+              </div>
+            </div>
+
+            <div class="row" ng-if="identityTypeLookup === IdentityType.Patient">
+              <div class="col-lg-6 form-group">
+                <label> Clinic Number </label>
+              </div>
+              <div class="col-lg-6 form-group">
+                <span>{{ medicalRecord.clinicContactNumber || '-' }}</span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 form-group">
+                <label> Appointment Date </label>
+              </div>
+              <div class="col-lg-6 form-group">
+                <span>{{ getDate(medicalRecord.medicalRecordData.appointmentDate) }}</span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 form-group">
+                <label> Age </label>
+              </div>
+              <div class="col-lg-6 form-group">
+                <span ng-if="medicalRecord.medicalRecordData.age > 0">
+                  {{ medicalRecord.medicalRecordData.age }}
+                  Years</span>
+                <span ng-if="medicalRecord.medicalRecordData.age === 0"> - </span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 form-group">
+                <label> Weight </label>
+              </div>
+              <div class="col-lg-6 form-group">
+                <span
+                  ng-if="medicalRecord.medicalRecordData.weight > 0">{{ medicalRecord.medicalRecordData.weight }}
+                  Kg</span>
+                <span ng-if="!medicalRecord.medicalRecordData.weight > 0">-</span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 form-group">
+                <label>Height </label>
+              </div>
+              <div class="col-lg-6 form-group">
+                <span
+                  ng-if="medicalRecord.medicalRecordData.height > 0">{{ medicalRecord.medicalRecordData.height }}
+                  Inches</span>
+                <span ng-if="!medicalRecord.medicalRecordData.height > 0">-</span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 form-group">
+                <label> Disability Type </label>
+              </div>
+              <div class="col-lg-6 form-group">
+                <span>{{ getDisabilityLookupText(medicalRecord.medicalRecordData.disabilityTypeLookup) }}</span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 form-group">
+                <label> Symptoms </label>
+              </div>
+              <div class="col-lg-6 form-group">
+                <span>{{ medicalRecord.medicalRecordData.symptoms || '-' }}</span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 form-group">
+                <label> Brief Histroy</label>
+              </div>
+              <div class="col-lg-6 form-group">
+                <span>{{ medicalRecord.medicalRecordData.briefHistory || '-' }}</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+</div>
+  <!-- <div ng-if="hasIncomingCall" class="call-overlay">
+    <i class="glyphicon glyphicon-facetime-video"></i>
+    <span id="incoming-call">Incoming Call</span>
+    <hr>
+    <img id="accept-call" src="/assets/accept.png" (click)="accepteCall()">
+    <img id="decline-call" src="/assets/decline.png" (click)="declineCall()">
+  </div> -->

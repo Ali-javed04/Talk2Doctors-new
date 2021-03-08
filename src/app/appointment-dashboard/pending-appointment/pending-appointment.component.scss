@@ -100,6 +100,14 @@
     font: status-bar;
     text-transform: capitalize;
 }
+.model-opicity {
+  opacity: 1.5 !important;
+}
+.type-name {
+  text-align: center;
+    font-weight: bold;
+}
+
 @media only screen and (max-width: 500px) {
  .modal-content {
   margin-top: 109px;

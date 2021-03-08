@@ -8,6 +8,8 @@ import { CompleteAppointmentComponent } from './complete-appointment/complete-ap
 import { ApprovedAppointmentComponent } from './approved-appointment/approved-appointment.component';
 import { CancelAppointmentComponent } from './cancel-appointment/cancel-appointment.component';
 import { FormsModule } from '@angular/forms';
+import { ModalComponent } from '../modal/modal.component';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 
 
@@ -17,12 +19,14 @@ import { FormsModule } from '@angular/forms';
     PendingAppointmentComponent,
     CompleteAppointmentComponent,
     ApprovedAppointmentComponent,
-    CancelAppointmentComponent
+    CancelAppointmentComponent,
+    // ModalComponent,
   ],
   imports: [
     CommonModule,
     AppointmentDashboardRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxUiLoaderModule,
   ]
 })
 export class AppointmentDashboardModule { }

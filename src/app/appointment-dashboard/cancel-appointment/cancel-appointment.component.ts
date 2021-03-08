@@ -6,6 +6,7 @@ import { AppointmentService } from 'src/app/Services/appointment.service';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { DateTimeService } from 'src/app/Services/date-time.service';
 import { IdentityService } from 'src/app/Services/identity.service';
+import { LookupService } from 'src/app/Services/lookup.service';
 
 @Component({
   selector: 'app-cancel-appointment',
@@ -29,7 +30,8 @@ export class CancelAppointmentComponent implements OnInit {
     public appointmentService: AppointmentService,
     private dateTimeService: DateTimeService,
     private identityService:IdentityService,
-    private authenctationService: AuthenticationService
+    private authenctationService: AuthenticationService,
+     private lookupService: LookupService
 
   ) {}
   public ngOnInit(): void {
@@ -59,6 +61,7 @@ export class CancelAppointmentComponent implements OnInit {
       multiSelect: true,
     }
     this.populatePreviousAppointments()
+    this.getAppointmentDetail(1)
   }
   public populatePreviousAppointments(): void {
     this.appointmentService.getDoctorAppointmentHistories(this.doctorId)
@@ -80,7 +83,7 @@ export class CancelAppointmentComponent implements OnInit {
       return;
     }
 
-    this.appointmentService.get(medicalRecordId)
+    this.appointmentService.getappointmentDetail(medicalRecordId)
       .then(response => {
         this.medicalRecord = response
         this.medicalRecord = this.medicalRecord
@@ -91,7 +94,7 @@ export class CancelAppointmentComponent implements OnInit {
   }
 
   public getDisabilityLookupText(lookupIndex: number): string {
-    return this.authenctationService.getNameValue(this.authenctationService.getDisabilityTypes(), lookupIndex)
+    return this.authenctationService.getNameValue(this.lookupService.getDisabilityTypes(), lookupIndex)
   }
 
 

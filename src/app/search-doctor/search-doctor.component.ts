@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import * as _ from 'lodash';
 import { IdentityType } from '../enums/enums';
 import { ICountSpecility, ITopRatedDoctors } from '../interfaces/appInterface';
@@ -46,8 +46,8 @@ export class SearchDoctorComponent implements OnInit {
 
   public doc: any
   public filters: any
-  public spcc: any
-  public spc = []
+  public spc: string[] = []
+
   public gedd: any
   public ged = []
   public geed: string = ''
@@ -62,20 +62,18 @@ export class SearchDoctorComponent implements OnInit {
     const params =  this.activeRouter.snapshot.queryParams
     this.populateDoctorsList()
     if(!_.isNil(params)) {
-
       if(_.has(params, 'specility')) {
-        this.spcc = params.specility
-        this.spc = this.spcc.split(",")
+      this.spc.push(params.specility)
+        console.log('specility in parms ',this.spc)
       }
-
       if(_.has(params, 'gender')) {
         this.gedd = params.gender
-        this.ged = this.gedd.split(",")
       }
       if(_.has(params, 'name')) {
         this.specialdoctor =  this.activeRouter.snapshot.queryParams.name
       }
     }
+
 
   }
 
@@ -84,7 +82,9 @@ export class SearchDoctorComponent implements OnInit {
     private IdentityService: IdentityService,
     private router: Router,
     private activeRouter: ActivatedRoute,
-    ) { }
+    ) {
+       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    }
 
 
     parametercheckup(){
@@ -97,38 +97,13 @@ export class SearchDoctorComponent implements OnInit {
     if(this.ged.find(item=>item === female)){
       this.female = true
     }
-    let cardiologist   = 'Cardiologist'
-    if(this.spc.find(item=>item === cardiologist)){
-      this.Cardiologist = true
-    }
-    let neurology   = 'Neurology'
-    if( this.spc.find(item=>item === neurology) ){
-      this.Neurology = true
-    }
-    let pediatrician   = 'Pediatrician'
-    if( this.spc.find(item=>item === pediatrician) ){
-      this.Pediatrician = true
-    }
-    let anesthesiology   = 'Anesthesiology'
-    if( this.spc.find(item=>item === anesthesiology)){
-      this.Anesthesiology = true
-    }
-    let dentist   = 'Dentist'
-    if( this.spc.find(item=>item === dentist) ){
-      this.Dentist = true
-    }
-    let gynecologists   = 'Gynecologists'
-    if( this.spc.find(item=>item === gynecologists) ){
-      this.Gynecologists = true
-    }
-    let generalSergon   = 'GeneralSergon'
-    if( this.spc.find(item=>item === generalSergon) ){
-      this.GeneralSergon = true
-    }
-    let radiologists   = 'Radiologists'
-    if( this.spc.find(item=>item === radiologists) ){
-      this.Radiologists = true
-    }
+      this.countspecility = _(this.countspecility).map((item) => {
+      if( this.spc .find(i=>i === item.name) ){
+        return _.assign(item, {isChecked: true})
+      }else {
+        return _.assign(item, {isChecked: false})
+      }
+    })  .value()
   }
 
   public onClickSpeciality(spciality): void {
@@ -139,17 +114,19 @@ export class SearchDoctorComponent implements OnInit {
     this.searchService.getDoctorsList('')
       .then(response => {
         this.countspecility = response.countDoctorBySpeciality
+        console.log("response",response)
         this.countspecility = _.sortBy(this.countspecility, x => x.totalDoctors).reverse()
+        console.log('iam there',this.countspecility)
         this.countspecility = _(this.countspecility).map((item) => {
           if( this.spc.find(i=>i === item.name) ){
+              console.log('name found')
             return _.assign(item, {isChecked: true})
           }else {
             return _.assign(item, {isChecked: false})
           }
         })
           .value()
-        this.topRatedDoctors = response.doctorsList
-        this.topRatedDoctors = _.sortBy(this.topRatedDoctors, x => x.doctorStarRatting).reverse()
+         this.topRatedDoctors = response.doctorsList
         this.parametercheckup()
         this.filterData()
       })
@@ -195,6 +172,10 @@ export class SearchDoctorComponent implements OnInit {
   }
 
   public applyFilter() {
+    const params: NavigationExtras =  {
+      queryParams: {
+     }
+   }
     this.ged  = []
     this.spc = []
     this.specialdoctor
@@ -207,35 +188,28 @@ export class SearchDoctorComponent implements OnInit {
       const f = 'female'
       this.geed = this.geed.concat(f)
     }
-    this.spc = this.countspecility
+    if(this.countspecility){
+      this.spc = this.countspecility
       .filter((item: any) => item.isChecked)
       .map((item: any) => item.name)
-    this.filters  = ``
+    }
     if(this.specialdoctor){
-      let a = `name=${this.specialdoctor}`
-      this.filters = this.filters.concat(a)
+      params.queryParams.name = this.specialdoctor
     }
     if(this.ged.length>0){
-      let b = `&gender=${this.ged}`
-      this.filters = this.filters.concat(b)
+      params.queryParams.gender = this.ged
     }
     if(this.spc.length>0){
-      let c = `&specility=${this.spc}`
-      this.filters = this.filters.concat(c)
+      params.queryParams.specility = this.spc
     }
-    this.sppc = this.spc.join(",")
-    this.geed = this.ged.join(",")
-    console.log("join",this.sppc)
-    console.log("string",this.geed)
-    this.router.navigate(['/search'], { queryParams: {name : this.specialdoctor ,gender :this.geed, specility:this.sppc } })
+
+
+    this.router.navigate(['/search'],params )
 
   }
   public covertPhotoUrl(photoUrl){
     return `data:image/jpeg;base64,${photoUrl}`
 
   }
-  // public activePage(index){
-  //   this.currenturl = index;
-  //   this.router.navigate(['/appointment'], { queryParams: { page: index } })
-  // }
+
 }

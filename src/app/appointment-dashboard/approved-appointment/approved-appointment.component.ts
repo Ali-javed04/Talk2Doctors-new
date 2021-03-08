@@ -9,6 +9,8 @@ import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { IMedicalRecordResponse } from 'src/app/interfaces/appInterface';
 import { IdentityType } from 'src/app/enums/enums';
 import * as _ from 'lodash';
+import { LookupService } from 'src/app/Services/lookup.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-approved-appointment',
@@ -32,7 +34,9 @@ export class ApprovedAppointmentComponent implements OnInit {
     public appointmentService: AppointmentService,
     private dateTimeService: DateTimeService,
     private identityService:IdentityService,
-    private authenctationService: AuthenticationService
+    private authenctationService: AuthenticationService,
+    private lookupService: LookupService,
+    private router: Router
 
   ) {}
   public ngOnInit(): void {
@@ -63,6 +67,7 @@ export class ApprovedAppointmentComponent implements OnInit {
       multiSelect: true,
     }
     this.populatePreviousAppointments()
+    this.getAppointmentDetail(1)
   }
   public populatePreviousAppointments(): void {
     this.appointmentService.getDoctorAppointmentHistories(this.doctorId)
@@ -73,7 +78,6 @@ export class ApprovedAppointmentComponent implements OnInit {
         this.tableOptions.data = this.appointmentHistories
         this.appointmentHistories = this.appointmentHistories.filter(x=>x.caseStatusLookup === 3)
         this.noRecord = this.appointmentHistories.length
-
       })
       .catch(error => {
         console.error(error)
@@ -84,7 +88,7 @@ export class ApprovedAppointmentComponent implements OnInit {
       return;
     }
 
-    this.appointmentService.get(medicalRecordId)
+    this.appointmentService.getappointmentDetail(medicalRecordId)
       .then(response => {
         this.medicalRecord = response
         this.medicalRecord = this.medicalRecord
@@ -95,16 +99,12 @@ export class ApprovedAppointmentComponent implements OnInit {
   }
 
   public getDisabilityLookupText(lookupIndex: number): string {
-    return this.authenctationService.getNameValue(this.authenctationService.getDisabilityTypes(), lookupIndex)
+    return this.authenctationService.getNameValue(this.lookupService.getDisabilityTypes(), lookupIndex)
   }
 
 
   public takeAppointment(reId: number): void{
-    // this.stateService.go(
-    //   'appointmentDetailView',
-    //   {
-    //     medicalRecordId: reId
-    //   }
-    // )
+    this.router.navigate(['/take-appointment' ,reId] )
+
   }
 }

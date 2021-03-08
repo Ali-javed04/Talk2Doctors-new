@@ -1,6 +1,11 @@
 
 <div class="container" *ngIf="noRecord == 0">
-  <p>No Record Found</p>
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="justify-content: center;">
+    <p style="color: #675ef3;
+    font-size: x-large;
+    text-align: center;" >No Record Found</p>
+    <img src="/assets/noRecord.svg" alt="" style="width: 100%;">
+  </div>
 </div>
 <div *ngFor="let user of appointmentHistories" class="appointments">
   <div class="appointment-list">
@@ -39,19 +44,19 @@
       </button>
 
 <!-- model -->
-<div *ngIf="medicalRecord" id="myModal" class="modal fade" role="dialog">
+<div *ngIf="medicalRecord" id="myModal"  class="modal fade model-opicity" role="dialog">
   <div class="modal-dialog">
 
   <!-- Modal content-->
   <div class="modal-content">
   <div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal">&times;</button>
   <h4 class="modal-title">Patient Detail</h4>
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
   </div>
   <div class="modal-body">
     <div class="dashboard-div-row details-height theme-gradient-border" >
       <div class="row">
-      <div class="col-lg-12 form-group appointment-type-name">
+      <div class="col-lg-12 form-group appointment-type-name type-name ">
         <span *ngIf="medicalRecord.medicalRecordData.medicalRecordTypeLookup === 1">
                 Online Appointment
         </span>

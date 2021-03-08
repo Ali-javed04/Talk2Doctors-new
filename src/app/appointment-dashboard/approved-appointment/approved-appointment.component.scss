@@ -1,0 +1,115 @@
+.appointments .appointment-list {
+  background-color: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+.appointment-list .profile-info-widget {
+  display: flex;
+  margin-right: auto;
+  text-align: left;
+}
+.profile-det-info {
+  overflow: hidden;
+}
+.profile-info-widget .booking-doc-img {
+  margin-right: 15px;
+}
+.appointment-list .profile-info-widget .booking-doc-img img {
+  border-radius: 4px;
+  height: 120px;
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 120px;
+}
+.profile-det-info h3 {
+  font-size: 17px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: black;
+  font-family: 'Roboto';
+  font-weight: bold;
+
+}
+.patient-details h5 {
+  color: #757575;
+  font-size: 13px;
+  font-weight: normal;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+}
+.patient-details h5 i {
+  width: 18px;
+}
+.appointments .appointment-action {
+  align-items: center;
+  display: inline-flex;
+  margin-left:auto
+}
+.appointment-action a {
+  font-size: 13px;
+}
+.color3 {
+  background: #fce0e7;
+  color: #e63c3b;
+}
+.color2 {
+  background: #e1f6ed;
+    color: #29b049;
+}
+.color1 {
+  background: #e1f6f6;
+  color: #6bb9aa;
+}
+.show {
+  opacity: 0.4;
+    transition-duration: 400ms;
+}
+.yess {
+  background-color: rgb(9, 229, 171);
+    border: 1px solid rgb(9, 229, 171);
+    color: rgb(255, 255, 255);
+}
+.nooo {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+.yess:hover {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+.noo:hover {
+  background-color: rgb(9, 229, 171);
+  border: 1px solid rgb(9, 229, 171);
+  color: rgb(255, 255, 255);
+}
+.capt {
+  font-family: sans-serif;
+    font-size: 18px;
+    color: cadetblue;
+    margin-top: 15px;
+    font: status-bar;
+    text-transform: capitalize;
+}
+.type-name {
+  text-align: center;
+    font-weight: bold;
+}
+.model-opicity {
+  opacity: 1.5 !important;
+}
+@media only screen and (max-width: 500px) {
+ .modal-content {
+  margin-top: 109px;
+ }
+}
+

@@ -105,24 +105,5 @@ public getNameValue<T extends ILookupItem>(lookupList: T[], lookupIndex: number,
 public getLookupItemByLookup<T extends ILookupItem>(lookups: T[], lookupIndex: number): T {
   return _.find(lookups, lookup => lookup.lookupIndex === lookupIndex);
 }
-public getDisabilityTypes(): ILookupItem[] {
-  return this.returnList(this.getLookupList('DisabilityType'))
-}
-public getLookupList(key: string): number {
-  return _.findIndex(this.data, { 'name': key })
-}
-public get data(): any {
-  if (_.isNil(this._data)) {
-    const serializedLookupList = localStorage.getItem('LookupList')
-    this._data = _.isNil(serializedLookupList)
-      ? []
-      : JSON.parse(serializedLookupList)
-  }
-  return this._data
-}
-public set data(data: any) {
-  this.returnList.cache = new _.memoize.Cache
-  this._data = data
-  localStorage.setItem('LookupList', JSON.stringify(data))
-}
+
 }

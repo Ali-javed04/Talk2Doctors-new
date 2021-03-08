@@ -18,6 +18,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchPipe } from './search.pipe';
 import { FormsModule } from '@angular/forms';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { ModalComponent } from './modal/modal.component';
+import { LoginModule } from './login/login.module';
 
 
 
@@ -34,6 +36,8 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     SelectRoleComponentComponent,
     SearchPipe,
 
+
+
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,8 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     HttpClientModule,
     NgbModule,
     FormsModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+
   ],
   providers: [ {
     provide : HTTP_INTERCEPTORS,

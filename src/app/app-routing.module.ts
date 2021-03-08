@@ -12,6 +12,7 @@ const routes: Routes = [
  { path: 'appointment', loadChildren: () => import(`./appointment-dashboard/appointment-dashboard.module`).then(m => m.AppointmentDashboardModule) },
  { path: 'profile/:identityId', loadChildren: () => import(`./profile/profile.module`).then(m => m.ProfileModule) },
  { path:'search',loadChildren:() => import(`./search-doctor/search-doctor.module`).then(m => m.SearchDoctorModule)},
+ { path:'take-appointment/:medicalRecordId',loadChildren:() => import(`./take-appointment/take-appointment.module`).then(m => m.TakeAppointmentModule)},
  { path: '', component: HomeComponent, pathMatch: 'full' },
 
 ];

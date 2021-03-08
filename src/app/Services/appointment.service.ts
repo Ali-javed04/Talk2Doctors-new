@@ -45,7 +45,7 @@ public getPatientAppointmentHistories(identityId: number, query: string = ''): P
   }>(`${this.host}appointment/patient/${identityId}/histories` + query).toPromise()
 
 }
-public get(medicalRecordId: number): Promise<IMedicalRecordResponse> {
+public getappointmentDetail(medicalRecordId: number): Promise<IMedicalRecordResponse> {
   return this.httpClient.get<IMedicalRecordResponse>( `${this.host}medicalrecord/${medicalRecordId}`).toPromise()
 }
 public updateDoctorDashboardAppointment(request: IUpdateDoctorDashboardAppointmentRequest):Promise<any> {
