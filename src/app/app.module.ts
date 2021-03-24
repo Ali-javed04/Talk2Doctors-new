@@ -18,8 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchPipe } from './search.pipe';
 import { FormsModule } from '@angular/forms';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
-import { ModalComponent } from './modal/modal.component';
-import { LoginModule } from './login/login.module';
+import { AgmCoreModule } from '@agm/core';
 
 
 
@@ -38,6 +37,7 @@ import { LoginModule } from './login/login.module';
 
 
 
+
   ],
   imports: [
     BrowserModule,
@@ -50,6 +50,9 @@ import { LoginModule } from './login/login.module';
     NgbModule,
     FormsModule,
     AutocompleteLibModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB1CaF3uz9Mv27pssBj4l-j5jc_-AQLrdU'
+    })
 
   ],
   providers: [ {

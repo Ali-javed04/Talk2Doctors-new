@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as _ from 'lodash';
 import { IdentityType } from 'src/app/enums/enums';
 import { IDoctorAppointmentHistoryData, IMedicalRecordResponse, IMedicalRecordData  } from 'src/app/interfaces/appInterface';
@@ -31,7 +32,8 @@ export class CompleteAppointmentComponent implements OnInit {
     private dateTimeService: DateTimeService,
     private IdentityService:IdentityService,
     private authenctationService: AuthenticationService,
-    private lookupService: LookupService
+    private lookupService: LookupService,
+    private router: Router
 
   ) {}
   public ngOnInit(): void {
@@ -99,13 +101,8 @@ export class CompleteAppointmentComponent implements OnInit {
   }
 
   public takeAppointment(reId: number): void{
+    this.router.navigate(['/report-generation' ,reId] )
 
-    // this.stateService.go(
-    //   'ReportGeneration',
-    //   {
-    //     medicalRecordId: reId
-    //   }
-    // )
   }
 
 }

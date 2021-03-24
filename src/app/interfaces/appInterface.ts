@@ -53,8 +53,17 @@ export interface IProfileData {
   clinicDays: IClinicDayData[]
   specialities: IDoctorSpecialityData[]
   degrees: IDoctorDegreeData[]
+  experiences:IDoctorExperienceData[]
   isActive: boolean
+
 }
+export interface marker {
+	lat: number;
+	lng: number;
+	label?: string;
+	draggable: boolean;
+}
+
 export interface ILocationData {
   latitude: number | null
   longitude: number | null
@@ -63,25 +72,22 @@ export interface CurrentChat {
   ReceiverIdentityId: number
   SenderName: string
 }
-export interface IDoctorSpecialityData {
-  doctorSpecialityID: number
-  xrefDoctorSpecialityID: number
-  name: string
-  doctorID: number
-  description: string
-}
+
 interface IClinicDayData {
   clinicDaysID: number
   name: string
   clinicDaysStatusID: number | null
   doctorID: number
 }
-export interface IDoctorDegreeData {
-  doctorDegreeID: number
-  xrefDoctorDegreeID: number
-  name: string
+
+export interface IDoctorExperienceData {
+  doctorExperienceID: number
+  xrefDoctorExperienceID: number
+  hosiptalName: string
   doctorID: number
-  description: string
+  fromInfo: string
+  toInfo: string
+  designation: string
 }
 export interface IIsProfileCompletedRequest {
   identityId: number
@@ -235,4 +241,88 @@ export interface IProvinceLookupItem extends ILookupItem {
   (name: 'translate'): {
       (translationId: string, interpolateParams?: any, interpolation?: string): string;
   };
+
+}
+export enum CaseStatus {
+  None = 0,
+  Request = 1,
+  Canceled = 2,
+  Approved = 3,
+  Completed = 4,
+  NoMoreAppointments = 5,
+  Pending = 6,
+  Expired = 7
+}
+export interface ILookupItem extends ILookupListEntry {
+}
+export interface ILookupListEntry {
+  lookupIndex: number
+  name: string
+  description?: string
+  isDisabled: boolean
+}
+
+export interface IProvinceLookupItem extends ILookupItem {
+  countryLookup: number
+}
+export interface IAddIdentityPhotosResponse {
+  identityPhotoDBID: number
+  identityID: number
+  identityPhoto: string
+}
+export interface IGetIdentityPhotoResponse {
+  identityPhotoID: number
+  identityID: number
+  identityPhoto: string
+}
+export interface IGetIdentityPhotosResponse {
+  identityPhotos: IIdentityPhoto[]
+}
+export interface IAddIdentityPhotosRequest {
+  identityID: number
+  identityPhoto: string
+  extention: string
+}
+export interface IAddIdentityPhotosResponse {
+  identityPhotoDBID: number
+  identityID: number
+  identityPhoto: string
+}
+
+export interface IIdentityPhoto {
+  identityPhotoDBID: number
+  identityID: number
+  identityPhoto: string
+  archivedInd: boolean
+  createdDateTime: string
+  lastUpdatedDateTime: string
+}
+export interface IUpdatePersonalDetailRequest {
+  firstname: string
+  lastname: string
+  email: string
+  genderTypeID: number
+  address1: string
+  address2: string
+  city: string
+  province: string
+  dateOfBirth: Date | string
+  cnic: string
+  phoneNumber: string
+  mobileNumber: string
+}
+export interface IDoctorSpecialityData {
+  doctorSpecialityID: number
+  xrefDoctorSpecialityID: number
+  name: string
+  doctorID: number
+  description: string
+}
+
+export interface IDoctorDegreeData {
+  doctorDegreeID: number
+  xrefDoctorDegreeID: number
+  name: string
+  doctorID: number
+  description: string
 }

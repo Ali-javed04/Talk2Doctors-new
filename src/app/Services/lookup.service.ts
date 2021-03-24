@@ -161,7 +161,8 @@ export class LookupService extends BaseNgX {
   }
 
   public getStatesByCountry(countryLookup: number): IProvinceLookupItem[] {
-    return _.filter(this.getProvinces(), state => state.countryLookup === countryLookup)
+    let numbervalue = Number(countryLookup)
+    return _.filter(this.getProvinces(), state => state.countryLookup === numbervalue)
   }
   public getNameValue<T extends ILookupItem>(lookupList: T[], lookupIndex: number, defaultIfNotFound?: string): string {
     const match = this.getLookupItemByLookup(lookupList, lookupIndex)

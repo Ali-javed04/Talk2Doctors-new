@@ -5,7 +5,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { IdentityType } from '../enums/enums';
-import { IAttachmentData, ILookupListEntry, IMedicalRecordResponse, IUpdateDoctorDashboardAppointmentRequest } from '../interfaces/appInterface';
+import { CaseStatus, IAttachmentData, ILookupListEntry, IMedicalRecordResponse, IUpdateDoctorDashboardAppointmentRequest } from '../interfaces/appInterface';
 import { AngularService } from '../Services/angular.service';
 import { AppointmentService } from '../Services/appointment.service';
 import { DoctorService } from '../Services/doctor.service';
@@ -44,6 +44,8 @@ export class TakeAppointmentComponent implements OnInit {
   public listOfPrescription: any[]
   attachment: IAttachmentData;
   public caseStatuses: ILookupListEntry[]
+   IdentityType=IdentityType
+   caseStatus = CaseStatus
 
   constructor(
     private ngxService: NgxUiLoaderService,
@@ -61,11 +63,15 @@ export class TakeAppointmentComponent implements OnInit {
     this.ngxService.start()
     this.doctorId = this.identityService.getActiveDoctorId()
 
-      this.medicalRecordId = this.activeRouter.snapshot.paramMap.get('medicalRecordId');;
+      this.medicalRecordId = this.activeRouter.snapshot.paramMap.get('medicalRecordId');
 
     console.log('queryparms',this.medicalRecordId)
     this.caseStatuses = this.lookupService.getCaseStatuses()
       this.getAppointmentDetail()
+      this.loaddiagnosis()
+      this.loadprescriptions()
+      this.getDagnosismedication()
+
 
   }
   public get identityTypeLookup(): number {
@@ -140,11 +146,9 @@ export class TakeAppointmentComponent implements OnInit {
   }
 
   public updatePatientAppointmentDetails(): void {
-
     this.ngxService.start()
     this.medicalRecord.medicalRecordData.diagnosis = this.selectedDiagnosis.toString();
     this.medicalRecord.medicalRecordData.prescription = JSON.stringify(this.selectedPrescriptions) ;
-
     const request: IUpdateDoctorDashboardAppointmentRequest = {
       medicalRecordID: this.medicalRecord.medicalRecordData.medicalRecordID,
       caseStatusId: 4,
@@ -258,5 +262,44 @@ export class TakeAppointmentComponent implements OnInit {
   public removeDiagnose(diagnoseToRemove: any): void{
     this.selectedDiagnosis.splice(diagnoseToRemove,1)
   }
+  public addNewPrescription(): void {
+    console.log(this.selectedPrescriptions)
+    const newPreference = {
+      medicineName: this.newPrescriptionValue,
+      dosage: this.newDosageValue,
+      dosageDuration: this.newDurationUnitValue,
+      durationCount: this.newDurationCountValue
+    }
+    var isItemAlreadyExist = this.selectedPrescriptions.some(name=> name.medicineName === newPreference.medicineName);
+    if (this.newPrescriptionValue === '' || isItemAlreadyExist) {
+      return
+    }
 
+    this.selectedPrescriptions.push(newPreference)
+    console.log("after push",this.selectedPrescriptions)
+  }
+  public addNewDiagnosis(inputValueArray: any): void {
+    var isItemAlreadyExist = this.selectedDiagnosis.includes(this.newDiagnosisValue)
+    if (inputValueArray.keyCode !== 13 || this.newDiagnosisValue === '' || isItemAlreadyExist) {
+      return
+    }
+
+    this.selectedDiagnosis.push(this.newDiagnosisValue)
+    console.log("after push",this.selectedDiagnosis)
+
+    this.filteredMedicines = this.listDiagnosisMedications
+      .find(diagnose => diagnose.name === this.newDiagnosisValue).medicines
+
+    if(this.filteredMedicines.length != 0)
+    {
+      this.filteredMedicines.forEach(element => {
+        var isItemAlreadyExist = this.selectedPrescriptions.some(name=> name.medicineName === element.medicineName);
+        if(!isItemAlreadyExist){
+          this.selectedPrescriptions.push(element)
+        }
+      });
+    }
+    this.filteredMedicines.splice(0,this.filteredMedicines.length)
+    this.newDiagnosisValue = ''
+  }
 }

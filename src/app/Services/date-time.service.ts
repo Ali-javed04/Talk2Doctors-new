@@ -10,4 +10,7 @@ export class DateTimeService {
   public convertStringToMomentDate(date: string): Date {
     return moment(date).toDate()
   }
+  public convertToDateOnly(date: string): string {
+    return moment(date).format('YYYY-MM-DD')
+  }
 }

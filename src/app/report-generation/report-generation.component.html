@@ -1,0 +1,72 @@
+<div  id="contentToConvert" class="container-fluid" >
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="invoice-content">
+        <div class="invoice-item">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="/assets/logo.png" alt="">
+            </div>
+            <div class="col-md-6">
+              <span (click)="takePrint()"><i class="fa fa-print" aria-hidden="true"></i>print</span>
+              <p class="invoice-details"><strong style="color:black">Issued:</strong>{{medicalRecord.medicalRecordData.creationDate | date}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="invoice-item" style="border-bottom: 2px solid black; ">
+          <div class="row" style="margin-top: 30px">
+            <div class="col-md-6">
+              <div class="invoice-info">
+                  <strong class="customer-text">Doctor</strong>
+                  <p class="invoice-details-two">{{medicalRecord.doctorName}}<br>
+                 806 Twin widen lade,old forge<br>
+                 New York ,USA</p>
+
+               </div>
+            </div>
+            <div class="col-md-6">
+              <div class="invoice-info">
+                <strong class="customer-text invoice-details">Patient Info</strong>
+                  <p class="invoice-details">name: {{medicalRecord.patientName}}<br>
+                    age: {{medicalRecord.medicalRecordData.age}}<br>
+                     height: {{medicalRecord.medicalRecordData.height}}
+                    <br>weight: {{medicalRecord.medicalRecordData.weight}}
+                    <br>symptoms: {{medicalRecord.medicalRecordData.symptoms}}<br>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="invoice-item invoice-item2">
+          <div class="row precption">
+            <div class="col-md-3">
+              <h2>Daignosis List</h2>
+              <div class="diagnosis" *ngFor="let item of diagnosis">
+                <p class="invoice-details-two">{{item}}</p>
+
+              </div>
+            </div>
+            <div class="col-md-9" style="border-left:2px solid black; height:-webkit-fill-available;" >
+
+              <h2>Medicine List</h2>
+              <div class="prescriptions" *ngFor="let pres of prescriptions">
+                <p class="invoice-details-two">{{pres.medicineName}}:</p>
+                <div class="row">
+                    <div class="col-2"><p class="invoice-details-two">Dosage</p></div>
+                    <div class="col-4"><p class="invoice-details-two">{{pres.dosage}}</p></div>
+                    <div class="col-3"><p class="invoice-details-two">Duration</p></div>
+                    <div class="col-3"><p class="invoice-details-two"> {{pres.durationCount}}, {{pres.dosageDuration}}</p></div>
+                </div>
+                <hr>
+
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="container">
+
+<button class="btn btn-success"  (click)="generatePdf()">generate PDF</button>
+</div>

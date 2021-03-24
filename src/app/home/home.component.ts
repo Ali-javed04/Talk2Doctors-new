@@ -31,6 +31,9 @@ data = [
  slideToshow:number  = 5
  showTab:number = 1;
  topRatedDoctors: ITopRatedDoctors[]
+  latitude: number;
+  longitude: number;
+  zoom: number;
   constructor( private toaster: ToastrService,
               private router: Router,
               private homeService: HomeService,
@@ -57,8 +60,17 @@ data = [
 
 
     this.populateDoctorsList()
+    this.setCurrentLocation()
   }
-
+  private setCurrentLocation() {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.zoom = 15;
+      });
+    }
+  }
   slides = [
     {img: "assets/smm1.jpg",title: "paksitan"},
     {img: "assets/smm2.jpg",title: 'India'},

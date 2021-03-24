@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { IIsProfileCompletedRequest, IIsProfileCompletedResponse, IUserToken } from '../interfaces/appInterface';
+import { IAddIdentityPhotosRequest, IAddIdentityPhotosResponse, IGetIdentityPhotoResponse, IGetIdentityPhotosResponse, IGetProfileResponse, IIdentityPhoto, IIsProfileCompletedRequest, IIsProfileCompletedResponse, IUpdatePersonalDetailRequest, IUserToken } from '../interfaces/appInterface';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -53,5 +54,32 @@ public hasValidAuthenticationToken(): boolean {
     return false
   }
 }
+
+public addPhoto(request: any): Promise<any> {
+  return this.httpClient.post<any>(`${this.host}identity/photo/add`, request).toPromise()
+}
+
+public getPhoto(identityId: number): Promise<IGetIdentityPhotoResponse> {
+  return this.httpClient.get<IGetIdentityPhotoResponse>(`${this.host}identity/${identityId}/photo`)
+    .toPromise()
+}
+
+public getPhotos(identityId: number): Promise<IGetIdentityPhotosResponse> {
+  return this.httpClient.get<IGetIdentityPhotosResponse>(`${this.host}identity/${identityId}/photos`).toPromise()
+}
+
+public updatePhoto(identityId: number, request: IIdentityPhoto) {
+  return this.httpClient.put(
+`${this.host}identity/${identityId}/photo/update`,request)
+ }
+ public getProfileByIdentityId(identityId: number): Observable<IGetProfileResponse> {
+  return this.httpClient.get<IGetProfileResponse>(
+    `${this.host}identity/${identityId}/profile`
+  )
+}
+public updatePersonalDetail(identityId: number, request: IUpdatePersonalDetailRequest) {
+  return this.httpClient.put(`${this.host}identity/${identityId}/update`,request)
+}
+
 
   }
